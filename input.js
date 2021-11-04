@@ -32,6 +32,8 @@ const handleUserInput = function (data) {
   else if (data === 'w') {
     connection.write("Move: up",)
   }
+  else
+  connection.write("Say: "+data,)
 
 
 
