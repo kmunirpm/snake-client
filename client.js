@@ -11,6 +11,7 @@ connection.on("connect", ()=> {
   connection.setEncoding("utf8");
   console.log("connected")
   connection.write("Name: KLM",)
+  setupInput();
 //  setTimeout(()=>{connection.write("Name: HEl",)}, 500)
 //  setTimeout(()=>{connection.write("Move: down",)}, 50)
   // setInterval(() => {
@@ -20,6 +21,7 @@ connection.on("connect", ()=> {
 
  
 connection.on('data', (data) => {
+  
   console.log(data.toString());
   connection.end();
 });
@@ -30,3 +32,23 @@ connection.on('data', (data) => {
  setTimeout(()=>{
    connection.end();
  },8000)
+
+
+ const setupInput = function () {
+  const stdin = process.stdin;
+  stdin.setRawMode(true);
+  stdin.setEncoding("utf8");
+  stdin.resume();
+  stdin.on("data", handleUserInput);
+  return stdin;
+};
+
+
+const handleUserInput = function (data) {
+  // your code here
+  process.stdout.write(data+'.');
+  // \u0003 maps to ctrl+c input
+  if (data === '\u0003') {
+    process.exit();
+  }
+};
