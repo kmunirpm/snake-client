@@ -1,11 +1,12 @@
 const net = require('net');
 const setupInput = require("./input");
+const { IP, PORT } = require("./constants");
 
 //const args = process.args.slice(2);
 
 const connection = net.createConnection({
-  host: '127.0.0.1',
-  port: 50541
+  host: IP,
+  port: PORT
 });
 
 
@@ -16,7 +17,7 @@ connection.on("connect", ()=> {
   setupInput(connection);
 //  setTimeout(()=>{connection.write("Name: HEl",)}, 500)
 //  setTimeout(()=>{connection.write("Move: down",)}, 50)
- // setInterval(() => { connection.write("Move: left",)}, 50)
+//  setInterval(() => { connection.write("Move: left",)}, 50)
   
   connection.on('data', (data) => {
     console.log(data.toString());
